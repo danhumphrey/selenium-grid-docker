@@ -1,6 +1,9 @@
 version: "3"
 services:
-
+  # Run docker-compose up to start grid and nodes
+  # use --scale chrome=n and/or --scale firefox=n to increase the number of browser nodes
+  # 1 node per container is considered best practice but can be increased by passing in
+  # environment variables : -e NODE_MAX_INSTANCES=n -e NODE_MAX_SESSION=n
   selenium-hub:
     image: selenium/hub:3.141.59-mercury
     ports:
@@ -27,3 +30,5 @@ services:
     environment:
       HUB_PORT_4444_TCP_ADDR: selenium-hub
       HUB_PORT_4444_TCP_PORT: 4444
+    # volumes:
+    #  - /dev/shm:/dev/shm # will need `set COMPOSE_CONVERT_WINDOWS_PATHS=1` on Windows
